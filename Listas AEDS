@@ -25,3 +25,78 @@ int main(){
   return 0;
 }
 -----------------------------------------------------------------------------
+
+#include <stdio.h>
+
+void sequencia(int n) {
+    if (n <= 5) {
+        printf("%d ", n);
+        sequencia(n + 1);
+    }
+}
+
+int main(){
+  int n = 1;
+  sequencia(n);
+  return 0;
+}
+
+------------------------------------------------------------------------
+
+#include <stdio.h>
+
+// Função recursiva para imprimir a sequência crescente até n
+void imprimirCrescente(int n) {
+    if (n > 1) {
+        imprimirCrescente(n - 1);
+    }
+    printf("%d ", n);
+}
+
+// Função recursiva para imprimir a sequência decrescente de n até 1
+void imprimirDecrescente(int n) {
+    printf("%d ", n);
+    if (n > 1) {
+        imprimirDecrescente(n - 1);
+    }
+}
+
+// Função principal que chama as funções recursivas para imprimir a sequência completa
+void imprimirSequencia() {
+    imprimirCrescente(5);
+    imprimirDecrescente(5);
+}
+
+int main() {
+    imprimirSequencia();
+    return 0;
+}
+
+--------------------------------------------------------------------------
+#include <stdio.h>
+
+void imprime_fibonacci(int n) {
+    if (n >= 1) {
+        static int anterior = 0, atual = 1;
+        if (n == 1) {
+            printf("%d ", anterior);
+        } else if (n == 2) {
+            printf("%d ", atual);
+        } else {
+            int proximo = anterior + atual;
+            printf("%d ", proximo);
+            anterior = atual;
+            atual = proximo;
+        }
+        imprime_fibonacci(n - 1);
+    }
+}
+
+int main() {
+    int n;
+    printf("Digite a quantidade de termos da sequencia de Fibonacci: ");
+    scanf("%d", &n);
+    imprime_fibonacci(n);
+    return 0;
+}
+
