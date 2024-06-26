@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+float calcSalarioLiq(float *salarioBruto, float *ptrINSS, float *ptrTransporte){
+    printf("Salario Bruto: ");
+    scanf("%f", salarioBruto);
+    float discINSS = (*salarioBruto) * 0.09;
+    *ptrINSS = discINSS;
+    float acresTrans = (*salarioBruto) * 0.06;
+    *ptrTransporte = acresTrans;
+    float salarioLiq = (*salarioBruto) + (*ptrTransporte) - (*ptrINSS);
+    return salarioLiq;
+}
+
+void valorINSS(float *ptrINSS)
+{
+    printf("INSS: %.2f\n", *ptrINSS);
+}
+
+void valorTransporte(float *ptrTransporte)
+{
+    printf("Transporte: %.2f\n", *ptrTransporte);
+}
+
+int main() {
+    float salLiq, salBruto, INSS, transporte;
+    salLiq = calcSalarioLiq(&salBruto, &INSS, &transporte);
+    printf("O salario Liquido é: %.2f\n", salLiq);
+    valorINSS(&INSS);
+    valorTransporte(&transporte);
+    return 0;
+}
+
+--------------------------------------------------------
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <ctype.h>
+
+void inicio(){
+  printf("\nPESO IDEAL PONTEIRO\n\n");
+}
+
+int detGen(char *gen, bool *ERRO){
+  do{
+  printf("Determine genero: ");
+  scanf("%c", gen);
+  *gen = toupper(*gen);
+  *ERRO = (*gen != 'M' || *gen != 'F');
+  if (ERRO)
+  {
+    printf("Valor invalido");
+  }
+    }while (*ERRO);
+  return *gen;
+}
+
+int detIdade(int* idade)
+{
+  printf("Determine idade: ");
+  scanf("%i", idade);
+  return *idade;
+}
+
+
+
+int main() {
+  inicio();
+
+  char genero =detGen(&gen, &ERRO);
+
+  return 0;
+}
+
+-------------------------------------------
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    printf("Digite o número de indivíduos: ");
+    scanf("%d", &n);
+
+    // Alocação dinâmica de memória para o vetor de alturas
+    float *alturas = (float *) malloc(n * sizeof(float));
+    if (alturas == NULL) {
+        printf("Erro ao alocar memória para o vetor de alturas.\n");
+        return 1;
+    }
+
+    // Alocação dinâmica de memória para o vetor de pesos ideais
+    float *pesos_ideais = (float *) malloc(n * sizeof(float));
+    if (pesos_ideais == NULL) {
+        printf("Erro ao alocar memória para o vetor de pesos ideais.\n");
+        free(alturas);
+        return 1;
+    }
+
+    // Leitura das alturas e cálculo dos pesos ideais
+    for (int i = 0; i < n; i++) {
+        printf("Digite a altura do indivíduo %d: ", i + 1);
+        scanf("%f", &alturas[i]);
+        pesos_ideais[i] = (alturas[i] - 100) * 0.9;
+    }
+
+    // Impressão dos pesos ideais
+    printf("\nPesos ideais:\n");
+    for (int i = 0; i < n; i++) {
+        printf("Indivíduo %d: %.2f kg\n", i + 1, pesos_ideais[i]);
+    }
+
+    // Liberação da memória alocada
+    free(alturas);
+    free(pesos_ideais);
+
+    return 0;
+}
